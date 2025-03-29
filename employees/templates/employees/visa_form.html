@@ -1,0 +1,109 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if form.instance.pk %}Edit Visa{% else %}Add Visa{% endif %}</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('/static/images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: left;
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            width: 100%;
+        }
+
+        .form-control {
+            height: 45px;
+            margin-bottom: 20px;
+        }
+
+        .d-flex .gap-2 {
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-container form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .form-container form .form-control {
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .form-container .btn {
+            max-width: 250px;
+        }
+
+        .back-btn-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .back-btn-container .btn {
+            max-width: 150px;
+        }
+    </style>
+</head>
+
+<body class="d-flex align-items-center justify-content-center vh-100">
+    <div class="form-container">
+        <div class="back-btn-container">
+            <a href="{% url 'employee_detail' employee.pk %}" class="btn btn-secondary">Back to Employee Details</a>
+        </div>
+
+        <h2>{% if form.instance.pk %}Edit Visa{% else %}Add Visa{% endif %} Details for {{ employee.name }}</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group mb-3">
+                {{ form.as_p }}
+            </div>
+
+            <div class="d-flex gap-2 mt-3 justify-content-center">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a href="{% url 'employee_detail' pk=employee.id %}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

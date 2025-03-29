@@ -1,0 +1,82 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ employee.name }} - Details</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('/static/images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
+
+<body class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="m-0">{{ employee.name }} - Details</h1>
+        <a href="{% url 'employee_list' %}" class="btn btn-secondary">Back to Employee List</a>
+    </div>
+
+    <p><strong>Employee ID:</strong> {{ employee.employee_id }}</p>
+    <p><strong>Department:</strong> {{ employee.department }}</p>
+    <p><strong>Designation:</strong> {{ employee.designation }}</p>
+    <p><strong>Joined Date:</strong> {{ employee.joined_date }}</p>
+
+    <div class="d-flex justify-content-between align-items-center mt-4 mb-2">
+        <h2 class="m-0">Visa Information</h2>
+        {% if employee.visa_set.count == 0 %}
+        <a href="{% url 'visa_create' employee_id=employee.id %}" class="btn btn-success">Add Visa</a>
+        {% else %}
+        <button class="btn btn-success" disabled>Add Visa</button>
+        {% endif %}
+    </div>
+
+    {% if employee.visa_set.all %}
+    <ul class="list-group">
+        {% for visa in employee.visa_set.all %}
+        <li class="list-group-item">
+            {{ visa.visa_type }} - Issued by {{ visa.visa_issue_country }} |
+            Passport Country: {{ visa.passport_country }}
+            (Expires: {{ visa.expiry_date|date:"F j, Y" }})
+            <a href="{% url 'visa_update' pk=visa.pk %}" class="btn btn-warning btn-sm">Edit</a>
+            <a href="{% url 'visa_delete' visa.pk %}" class="btn btn-danger btn-sm"
+                onclick="return confirm('Are you sure you want to delete this visa?');">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No visa information available.</p>
+    {% endif %}
+
+    <div class="d-flex justify-content-between align-items-center mt-4 mb-2">
+        <h2 class="m-0">Employee Documents</h2>
+        <a href="{% url 'upload_employee_document' employee.id %}" class="btn btn-success">Upload Document</a>
+    </div>
+
+    {% if documents %}
+    <ul class="list-group">
+        {% for doc in documents %}
+        <li class="list-group-item">
+            <a href="{{ doc.uploaded_file.url }}" target="_blank">{{ doc.document_name }}</a>
+            <span class="text-muted">(Uploaded: {{ doc.uploaded_at|date:"F j, Y - g:i A" }})</span>
+            <a href="{% url 'delete_employee_document' employee.id doc.id %}" class="btn btn-danger btn-sm"
+                onclick="return confirm('Are you sure you want to delete this document?');">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No documents uploaded.</p>
+    {% endif %}
+
+
+</body>
+
+</html>
