@@ -14,10 +14,10 @@
 #!/bin/bash
 
 # Update package repository
-sudo yum update -y
+sudo dnf update -y
 
 # Install MariaDB
-sudo yum install -y mariadb-server
+sudo dnf install -y mariadb-server
 
 # Start MariaDB service
 sudo systemctl start mariadb
