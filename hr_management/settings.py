@@ -125,8 +125,9 @@ LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'login'
 
 
-# STATIC FILES
+# Static files settings
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # To serve static files from S3
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
@@ -136,8 +137,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'), 
 ]
 
-# Static files storage location for production
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Only needed in production
 
 
 
