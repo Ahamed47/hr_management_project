@@ -13,15 +13,20 @@
 
 #!/bin/bash
 
-# Update package repository
-sudo dnf update -y
+# Update packages and install amazon-linux-extras if missing
+sudo yum update -y
+sudo yum install -y amazon-linux-extras
 
-# Install MariaDB
-sudo dnf install -y mariadb-server
+# Enable MySQL 8.0
+sudo amazon-linux-extras enable mysql8.0
 
-# Start MariaDB service
-sudo systemctl start mariadb
-sudo systemctl enable mariadb
+# Install MySQL server
+sudo yum install -y mysql mysql-server
 
-# Secure the MariaDB installation (optional but recommended)
+# Start MySQL service
+sudo systemctl start mysqld
+sudo systemctl enable mysqld
+
+# Secure MySQL installation
 sudo mysql_secure_installation
+
