@@ -16,10 +16,10 @@
 # Update package repository
 sudo yum update -y
 
-# Install MariaDB server and development libraries
-sudo yum install -y mariadb-server mariadb-devel
+# Install MariaDB
+sudo yum install -y mariadb-server
 
-# Start the MariaDB service
+# Start MariaDB service
 sudo systemctl start mariadb
 sudo systemctl enable mariadb
 
