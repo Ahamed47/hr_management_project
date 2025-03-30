@@ -1,13 +1,16 @@
 name: CI-CD pipeline to AWS
 
 env:
-  DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
-  EB_S3_BUCKET_NAME: "elasticbeanstalk-your-region-xxxxxxxxx"
+  DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }} # Your Django secret key
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }} # Your AWS access key
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # Your AWS secret access key
+  AWS_STORAGE_BUCKET_NAME: ${{ secrets.AWS_STORAGE_BUCKET_NAME }} # Your S3 bucket name
+  EB_S3_BUCKET_NAME: "elasticbeanstalk-eu-west-1-050752637269"
   EB_APPLICATION_NAME: "HR-Management-Tool"
   EB_ENVIRONMENT_NAME: "HR-Management-Tool-env"
   DEPLOY_PACKAGE_NAME: "hr-management-tool-${{ github.sha }}.zip"
   VERSION_NAME: ${{ github.sha }}
-  AWS_REGION_NAME: "us-east-2"
+  AWS_REGION_NAME: "eu-west-1"
 
 on:
   push:
