@@ -1,7 +1,11 @@
 #!/bin/bash
+# install_mysql.sh
 
-# Update package information
-sudo dnf update -y
+# Update the package repository
+sudo yum update -y
 
-# Install MySQL or MariaDB server and development libraries
-sudo dnf install -y mysql mysql-server mysql-devel || sudo dnf install -y mariadb mariadb-server mariadb-devel
+# Install MySQL client (do not install MySQL server or MariaDB server)
+sudo yum install -y mysql
+
+# Install MySQL development libraries (for the MySQL client and Python bindings)
+sudo yum install -y mysql-devel
