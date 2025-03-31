@@ -1,4 +1,17 @@
 #!/bin/bash
+sudo dnf update -y
+sudo dnf install mysql-server -y
+sudo systemctl start mysqld
+sudo systemctl enable mysqld
+sudo mysql_secure_installation
+
+
+
+
+
+
+
+#!/bin/bash
 # install_mysql.sh
 
 # Update the package repository
@@ -13,20 +26,20 @@
 
 #!/bin/bash
 
-# Update packages and install amazon-linux-extras if missing
-sudo yum update -y
-sudo yum install -y amazon-linux-extras
+# # Update packages and install amazon-linux-extras if missing
+# sudo yum update -y
+# sudo yum install -y amazon-linux-extras
 
-# Enable MySQL 8.0
-sudo amazon-linux-extras enable mysql8.0
+# # Enable MySQL 8.0
+# sudo amazon-linux-extras enable mysql8.0
 
-# Install MySQL server
-sudo yum install -y mysql mysql-server
+# # Install MySQL server
+# sudo yum install -y mysql mysql-server
 
-# Start MySQL service
-sudo systemctl start mysqld
-sudo systemctl enable mysqld
+# # Start MySQL service
+# sudo systemctl start mysqld
+# sudo systemctl enable mysqld
 
-# Secure MySQL installation
-sudo mysql_secure_installation
+# # Secure MySQL installation
+# sudo mysql_secure_installation
 
