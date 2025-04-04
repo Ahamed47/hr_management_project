@@ -1,55 +1,39 @@
-#!/bin/bash
+# #!/bin/bash
+# set -e
 
-# Enable MySQL 8.0 repository (if using Amazon Linux 2)
-sudo amazon-linux-extras enable mysql8.0
-
-# Install MySQL
-sudo yum clean metadata
-sudo yum install -y mysql mysql-server
-
-# Start MySQL service
-sudo systemctl start mysqld
-sudo systemctl enable mysqld
-
-# Run MySQL secure installation
-sudo mysql_secure_installation
-
-
-
-
-
-
-
-
-#!/bin/bash
-# install_mysql.sh
-
-# Update the package repository
-# sudo dnf update -y
-
-# # Install MySQL 8.0
-# sudo dnf install -y mysql mysql-server mysql-devel
-
-# If you want MariaDB, use the following command instead:
-# sudo dnf install -y mariadb mariadb-devel
-
-
-#!/bin/bash
-
-# # Update packages and install amazon-linux-extras if missing
-# sudo yum update -y
-# sudo yum install -y amazon-linux-extras
-
-# # Enable MySQL 8.0
-# sudo amazon-linux-extras enable mysql8.0
-
-# # Install MySQL server
-# sudo yum install -y mysql mysql-server
+# # Check OS version
+# if [ -f /etc/system-release ]; then
+#     OS_VERSION=$(cat /etc/system-release)
+    
+#     # Amazon Linux 2
+#     if [[ "$OS_VERSION" == *"Amazon Linux 2"* ]]; then
+#         # Enable MySQL 8.0 and install MySQL for Amazon Linux 2
+#         sudo amazon-linux-extras enable mysql8.0
+#         sudo yum clean metadata
+#         sudo yum install -y mysql mysql-server
+        
+#     # Amazon Linux 2023
+#     elif [[ "$OS_VERSION" == *"Amazon Linux 2023"* ]]; then
+#         # Install MySQL for Amazon Linux 2023 (uses dnf package manager)
+#         sudo dnf install -y mysql-community-server
+        
+#         # In case MySQL is not available, install MariaDB as an alternative
+#         if [ $? -ne 0 ]; then
+#             echo "MySQL installation failed, attempting to install MariaDB instead."
+#             sudo dnf install -y mariadb-server
+#         fi
+#     else
+#         echo "Unknown OS version. Please ensure you're using Amazon Linux 2 or 2023."
+#         exit 1
+#     fi
+# else
+#     echo "Unable to detect OS version. Please ensure the system is running Amazon Linux."
+#     exit 1
+# fi
 
 # # Start MySQL service
 # sudo systemctl start mysqld
 # sudo systemctl enable mysqld
 
-# # Secure MySQL installation
+# # Secure MySQL installation (interactive)
 # sudo mysql_secure_installation
-
