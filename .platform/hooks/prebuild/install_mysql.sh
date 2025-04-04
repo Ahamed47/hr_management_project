@@ -1,7 +1,7 @@
 # #!/bin/bash
 # set -e
 
-# # Check OS version
+# Check OS version
 # if [ -f /etc/system-release ]; then
 #     OS_VERSION=$(cat /etc/system-release)
     
